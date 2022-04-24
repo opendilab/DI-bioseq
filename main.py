@@ -9,10 +9,6 @@ from bioseq.encoder import create_encoder
 from bioseq.utils.draw_results import draw_results
 
 
-def get_worker_from_args(args):
-    pass
-
-
 def main(args):
     score_per_round = args.score
     predict_per_round = args.predict
@@ -47,6 +43,7 @@ if __name__ == '__main__':
     parser.add_argument('--score', type=int, default=384, help="max score in landscape each round")
     parser.add_argument('--predict', type=int, default=3200, help="max prediction in model each round")
     parser.add_argument('--round', type=int, default=10, help="searching rounds")
+    parser.add_argument('--logdir', type=str, default='results', help="result logging folder path")
 
     args = parser.parse_known_args()[0]
 

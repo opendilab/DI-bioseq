@@ -10,7 +10,7 @@ class BaseEngine():
     def __init__(
             self,
             model: "BaseModel",  # noqa
-            encoder: Any,
+            encoder: "BaseEncoder",  # noqa
             codebook: str,
             predict_num: int,
     ) -> None:

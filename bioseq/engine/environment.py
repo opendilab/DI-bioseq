@@ -1,7 +1,8 @@
 import numpy as np
 from typing import Any, Dict, Optional
+import gym
 
-from ding.envs import BaseEnv, BaseEnvTimestep, BaseEnvInfo
+from ding.envs import BaseEnv, BaseEnvTimestep
 from ding.envs.common.env_element import EnvElementInfo
 from ding.torch_utils import to_ndarray
 from ding.utils import ENV_REGISTRY
@@ -10,7 +11,7 @@ from ding.utils import ENV_REGISTRY
 @ENV_REGISTRY.register("bioseq_mutative")
 class MutativeEnv(BaseEnv):
 
-    reward_space = None
+    reward_space = gym.spaces.Box(low=0, high=1, shape=(1, ))
 
     def __init__(self, model, encoder, codebook, start_seq) -> None:
         self._model = model
@@ -21,6 +22,8 @@ class MutativeEnv(BaseEnv):
         self._episode_seqs = set()
         self._last_fitness = -float("inf")
         self._lam = 0.1
+        self.observation_space = gym.spaces.Box(low=0, high=1, shape=(len(self._cur_seq) * len(self._codebook), ))
+        self.action_space = gym.spaces.Discrete(len(self._cur_seq) * len(self._codebook))
 
     def reset(self, start_seq: Optional[str] = None) -> Any:
         self._total_reward = 0
@@ -62,34 +65,6 @@ class MutativeEnv(BaseEnv):
         if done:
             info['final_eval_reward'] = self._total_reward
         return BaseEnvTimestep(to_ndarray(obs, dtype=np.float32), to_ndarray(reward, dtype=np.float32), done, info)
-
-    def info(self) -> BaseEnvInfo:
-        obs_space = EnvElementInfo(
-            (len(self._cur_seq) * len(self._codebook), ),
-            {
-                'min': 0,
-                'max': 1,
-                'dtype': np.float32,
-            },
-        )
-        act_space = EnvElementInfo(
-            (1, ),
-            {
-                'min': 0,
-                'max': len(self._cur_seq) * len(self._codebook),
-                'dtype': int,
-            },
-        )
-        rew_space = EnvElementInfo(
-            (1, ),
-            {
-                'min': 0.0,
-                'max': 1.0,
-            },
-        )
-        return BaseEnvInfo(
-            agent_num=1, obs_space=obs_space, act_space=act_space, rew_space=rew_space, use_wrappers=False
-        )
 
     def seed(self, seed: int, dynamic_seed: bool = True) -> None:
         self._seed = seed

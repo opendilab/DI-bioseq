@@ -6,13 +6,12 @@ from ding.policy import PPOOffPolicy
 from ding.envs import AsyncSubprocessEnvManager, BaseEnvManager
 from ding.worker import BaseLearner, SampleSerialCollector, NaiveReplayBuffer
 from ding.config import compile_config
-from bioseq.model.base_model import BaseModel
 from bioseq.engine.environment import MutativeEnv
 from bioseq.utils.registry import ENGINE_REGISTRY
 from .base_engine import BaseEngine
 
 ppo_config = dict(
-    exp_name="ppo_offpolicy",
+    exp_name="bio_rl",
     env=dict(
         env_num=8,
         manager=dict(
@@ -68,8 +67,8 @@ class PPOEngine(BaseEngine):
 
     def __init__(
             self,
-            model: "BaseModel",
-            encoder: Any,
+            model: "BaseModel",  # noqa
+            encoder: "BaseEncoder",  # noqa
             codebook: str,
             predict_num: int,
             seq_len: int,
@@ -100,7 +99,9 @@ class PPOEngine(BaseEngine):
             ],
             cfg=self._rl_cfg.env.manager
         )
-        collector = SampleSerialCollector(self._rl_cfg.policy.collect.collector, env, self._policy.collect_mode)
+        collector = SampleSerialCollector(
+            self._rl_cfg.policy.collect.collector, env, self._policy.collect_mode, exp_name=self._rl_cfg.exp_name
+        )
 
         sequences = {}
         data_num = 0
@@ -132,5 +133,7 @@ class PPOEngine(BaseEngine):
     def reset(self) -> None:
         super().reset()
         self._policy = PPOOffPolicy(self._rl_cfg.policy)
-        self._learner = BaseLearner(self._rl_cfg.policy.learn.learner, self._policy.learn_mode)
-        self._replay_buffer = NaiveReplayBuffer(self._rl_cfg.policy.other.replay_buffer)
+        self._learner = BaseLearner(
+            self._rl_cfg.policy.learn.learner, self._policy.learn_mode, exp_name=self._rl_cfg.exp_name
+        )
+        self._replay_buffer = NaiveReplayBuffer(self._rl_cfg.policy.other.replay_buffer, exp_name=self._rl_cfg.exp_name)

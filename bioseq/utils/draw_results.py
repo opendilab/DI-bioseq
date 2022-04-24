@@ -14,10 +14,7 @@ def get_result_data(data_dir):
             data = pd.read_csv(f)
 
         rounds = data['round'].max() + 1
-        max_score_per_round = [
-            data['real_score'][data['round'] == r].max()
-            for r in range(rounds)
-        ]
+        max_score_per_round = [data['real_score'][data['round'] == r].max() for r in range(rounds)]
         max_score_per_round = np.maximum.accumulate(max_score_per_round)
         score_cost = sorted(set(data['score_times']))
         result['score'].extend(max_score_per_round)
@@ -50,8 +47,5 @@ def draw_results(data_dir_dict, fig_name=None):
 
 if __name__ == "__main__":
     fig_name = "compare_results.png"
-    names_and_dirs = {
-        "Random": "results/gb1/random-linear-onehot",
-        "PPO": "results/gb1/ppo_offpolicy-linear-onehot"
-    }
+    names_and_dirs = {"Random": "results/gb1/random-linear-onehot", "PPO": "results/gb1/ppo_offpolicy-linear-onehot"}
     draw_results(names_and_dirs, fig_name)

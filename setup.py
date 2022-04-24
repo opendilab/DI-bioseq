@@ -25,7 +25,7 @@ setup(
     ],
     python_requires='>=3.6',
     install_requires=[
-        'di-engine==0.2.3',
+        'di-engine>=0.3',
         'scikit-learn==0.24.2',
     ],
 )
