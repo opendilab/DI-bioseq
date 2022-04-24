@@ -1,6 +1,6 @@
 # DI-bioseq
 
-<img src="./docs/figs/di-bioseq_logo.png" width="200" alt="icon"/>
+<img src="./docs/figs/di-bioseq_banner.png" alt="icon"/>
 
 Updated on 2022.3.29
 
