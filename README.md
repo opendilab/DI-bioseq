@@ -2,7 +2,7 @@
 
 <img src="./docs/figs/di-bioseq_banner.png" alt="icon"/>
 
-Updated on 2022.3.29
+Updated on 2022.4.24
 
 DI-bioseq - Decision Intelligence platform for biological sequence prediction and searching.
 
