@@ -90,7 +90,8 @@ class PPOEngine(BaseEngine):
         self._rl_cfg.policy.model.action_shape = act_shape
         self._rl_cfg.policy.model.obs_shape = obs_shape
 
-    def generate_sequences(self, old_sequences: Sequence[str], sequence_num: int) -> Tuple[np.ndarray, np.ndarray]:
+    def generate_sequences(self, old_sequences: Sequence[str], scores: Sequence[float],
+                           sequence_num: int) -> Tuple[np.ndarray, np.ndarray]:
         env_num = self._rl_cfg.env.env_num
         env = AsyncSubprocessEnvManager(
             env_fn=[

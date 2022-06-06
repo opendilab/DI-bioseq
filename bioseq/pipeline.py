@@ -57,7 +57,7 @@ class Pipeline():
             labels = current_data['real_score'].to_numpy()
             self._engine.update_model(data, labels)
             new_sequences, new_predictions = self._engine.generate_sequences(
-                current_data['current_sequences'], self._score_per_round
+                current_data['current_sequences'], labels, self._score_per_round
             )
             real_score = self._landscape.get_score(new_sequences)
             current_data = current_data.append(

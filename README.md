@@ -2,13 +2,29 @@
 
 <img src="./docs/figs/di-bioseq_banner.png" alt="icon"/>
 
-Updated on 2022.4.24
+**DI-bioseq** is an open-source Decision Intelligence platform for biological sequence prediction and searching.
+DI-bioseq provides a Reinforcement Learning pipeline for **biological sequence searching**, including DNA, RNA, and amino acid sequences.
+DI-bioseq uses [**DI-engine**](https://github.com/opendilab/DI-engine), an RL platform to build searching methods. 
+DI-bioseq is an application platform under [**OpenDILab**](http://opendilab.org/).
+DI-bioseq was developed referencing [FLEXS](https://github.com/samsinai/FLEXS) on biological environments and modules.
 
-DI-bioseq - Decision Intelligence platform for biological sequence prediction and searching.
+## Outline
+
+
+
+  - [Introduction](#introduction)
+  - [Installation](#installation)
+  - [Features](#features)
+  - [Quick Start](#quick-start)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Citation](#citation)
 
 ## Introduction
 
-**DI-bioseq** is an open-source application platform under [**OpenDILab**](http://opendilab.org/). DI-bioseq provides Reinforcement Learning pipeline for **biological sequence searching**, including DNA, RNA, and amino acid sequences. Biological sequence searching problems aims to find a sequence with a fixed length of these elements that has the best characteristics that humans desired, represented by a score. The search starts from a series of known sequences whose scores are measured via biological experiments. The searching procedure is expected to be high-efficient, with less scores referred to from biological experiments, rather than trying a lot to find the best one.
+Biological sequence searching problems aims to find a sequence with a fixed length of these elements that has the best characteristics that humans desired, represented by a score. The search usually starts from a series of known sequences whose scores are measured via biological experiments.
+
+Considering the high cost and time consumption of real biological experiments required for verifying the results, the searching procedure is expected to be high-efficient, with fewer scores referred to from biological experiments, rather than proposing lots of candidates and iteration many rounds to find the best one.
 
 Biological sequence searching pipelines often consists of the following modules:
 
@@ -17,13 +33,7 @@ Biological sequence searching pipelines often consists of the following modules:
 - An **Encoder** to convert a sequence into numbers
 - An **Engine** which is the core method to find new sequence proposals from known ones and scores
 
-**DI-bioseq** uses [**DI-engine**](https://github.com/opendilab/DI-engine), an RL platform to build searching methods. The environment is set to generate new sequences from existing ones, and the predicted score from model together with some other statistics is used as reward.
-
-**DI-bioseq** was developed referencing [FLEXS](https://github.com/samsinai/FLEXS) on biological environments and modules.
-
-## Guidence
-
-### Installation
+## Installation
 
 **DI-bioseq** together with **DI-engine** can be easily installed from source via `pip`.
 
@@ -33,7 +43,7 @@ cd di-bioseq
 pip install -e . --user
 ```
 
-### Features
+## Features
 
 **DI-bioseq** currently supports the following searching modules.
 
@@ -41,15 +51,16 @@ pip install -e . --user
 |  ----  | ----  |  ----  |  ----  |
 | GB1  |  Random |  Linear Regression  |   Onehot  |
 | TF-Binding  |  Off-policy PPO(onehot only)  |    Random Forest Regression   |   Georgiev(protein only)   |
+|  | AdaLead |  |  |
 
-### Quick start
+## Quick Start
 
-**DI-bioseq** provides a standard searching pipeline and entry that can be configured 
+**DI-bioseq** provides a standard searching pipeline and entry that can be configured by arguments.
 
 ```bash
-main.py [-h] [--landscape LANDSCAPE] [--engine ENGINE] [--model MODEL]
+usage: main.py [-h] [--landscape LANDSCAPE] [--engine ENGINE] [--model MODEL]
                [--encoder ENCODER] [--score SCORE] [--predict PREDICT]
-               [--round ROUND]
+               [--round ROUND] [--logdir LOGDIR]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -61,11 +72,17 @@ optional arguments:
   --score SCORE         max score in landscape each round
   --predict PREDICT     max prediction in model each round
   --round ROUND         searching rounds
+  --logdir LOGDIR       result logging folder path
 ```
 
-## Contributing
+## Join and Contribute
 
-We appreciate all contributions to improve DI-bioseq, both algorithms and system designs.
+We appreciate all contributions to improve DI-drive, both algorithms and system designs. Welcome to OpenDILab community! Scan the QR code and add us on Wechat:
+
+<div align=center><img width="250" height="250" src="./docs/figs/qr.png" alt="qr"/></div>
+
+Or you can contact us with [slack](https://opendilab.slack.com/join/shared_invite/zt-v9tmv4fp-nUBAQEH1_Kuyu_q4plBssQ#/shared-invite/email) or email (opendilab.contact@gmail.com).
+
 
 ## License
 

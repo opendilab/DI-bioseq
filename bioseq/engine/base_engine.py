@@ -20,7 +20,8 @@ class BaseEngine():
         self._predict_num = predict_num
 
     @abstractmethod
-    def generate_sequences(self, old_sequences: Sequence[str], sequence_num: int) -> Tuple[np.ndarray, np.ndarray]:
+    def generate_sequences(self, old_sequences: Sequence[str], scores: Sequence[float],
+                           sequence_num: int) -> Tuple[np.ndarray, np.ndarray]:
         raise NotImplementedError
 
     @abstractmethod

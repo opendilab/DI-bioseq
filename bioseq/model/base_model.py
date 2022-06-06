@@ -20,8 +20,9 @@ class BaseModel():
     def _fit(self, sequences: Union[Sequence[str], np.ndarray], label: Sequence[Any]):
         pass
 
-    def predict(self, sequences: Union[Sequence[str], np.ndarray]) -> np.array:
-        self._predict_times += len(sequences)
+    def predict(self, sequences: Union[Sequence[str], np.ndarray], ignore_count: bool = False) -> np.array:
+        if not ignore_count:
+            self._predict_times += len(sequences)
         return self._fit(sequences)
 
     def reset(self) -> None:

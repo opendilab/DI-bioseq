@@ -22,7 +22,8 @@ class RandomEngine(BaseEngine):
         super().__init__(model, encoder, codebook, predict_num)
         self._mu = mu
 
-    def generate_sequences(self, old_sequences: Sequence[str], sequence_num: int) -> Tuple[np.ndarray, np.ndarray]:
+    def generate_sequences(self, old_sequences: Sequence[str], scores: Sequence[float],
+                           sequence_num: int) -> Tuple[np.ndarray, np.ndarray]:
         new_sequences = set()
         while len(new_sequences) < self._predict_num:
             seq = np.random.choice(old_sequences)
