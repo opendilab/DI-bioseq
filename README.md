@@ -2,6 +2,15 @@
 
 <img src="./docs/figs/di-bioseq_banner.png" alt="icon"/>
 
+[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fopendilab)](https://twitter.com/opendilab)
+![GitHub Org's stars](https://img.shields.io/github/stars/opendilab)
+[![GitHub stars](https://img.shields.io/github/stars/opendilab/DI-bioseq)](https://github.com/opendilab/DI-bioseq/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/opendilab/DI-bioseq)](https://github.com/opendilab/DI-bioseq/network)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/opendilab/DI-bioseq)
+[![GitHub license](https://img.shields.io/github/license/opendilab/DI-bioseq)](https://github.com/opendilab/DI-bioseq/blob/master/LICENSE)
+
+## Introduction
+
 **DI-bioseq** is an open-source Decision Intelligence platform for biological sequence prediction and searching.
 DI-bioseq provides a Reinforcement Learning pipeline for **biological sequence searching**, including DNA, RNA, and amino acid sequences.
 DI-bioseq uses [**DI-engine**](https://github.com/opendilab/DI-engine), an RL platform to build searching methods. 
@@ -9,8 +18,6 @@ DI-bioseq is an application platform under [**OpenDILab**](http://opendilab.org/
 DI-bioseq was developed referencing [FLEXS](https://github.com/samsinai/FLEXS) on biological environments and modules.
 
 ## Outline
-
-
 
   - [Introduction](#introduction)
   - [Installation](#installation)
@@ -77,7 +84,7 @@ optional arguments:
 
 ## Join and Contribute
 
-We appreciate all contributions to improve DI-drive, both algorithms and system designs. Welcome to OpenDILab community! Scan the QR code and add us on Wechat:
+We appreciate all contributions to improve DI-bioseq, both algorithms and system designs. Welcome to OpenDILab community! Scan the QR code and add us on Wechat:
 
 <div align=center><img width="250" height="250" src="./docs/figs/qr.png" alt="qr"/></div>
 
